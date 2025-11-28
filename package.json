@@ -1,0 +1,19 @@
+{
+  "name": "parse-marathon-events",
+  "version": "1.0.0",
+  "description": "An automated workflow to scrape and parse the latest marathon and running event schedules. Use this action to keep your dataset or database updated automatically on a set schedule.",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "main": "src/scrape-roadrun.mjs",
+  "scripts": {
+    "scrape:roadrun": "node src/scrape-roadrun.mjs"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "dayjs": "^1.11.19",
+    "iconv-lite": "^0.7.0"
+  }
+}
