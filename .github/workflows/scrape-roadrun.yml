@@ -1,0 +1,41 @@
+name: Scrape roadrun events
+
+#
+#  •	on.schedule.cron: 주 1회 자동 실행
+#  •	workflow_dispatch: GitHub UI에서 버튼 눌러 수동 실행 가능
+#  •	npm run scrape:roadrun: 우리가 만든 파서 실행
+#  •	upload-artifact: output/roadrun.json을 빌드 결과물로 저장
+#
+
+on:
+  schedule:
+    # 매주 월요일 00:00 KST 근처 (UTC 기준 일요일 15:00)
+    - cron: "0 15 * * 0"
+  # 필요할 때 수동으로도 돌릴 수 있게
+  workflow_dispatch: {}
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Run scraper
+        run: npm run scrape:roadrun
+
+      # 결과 JSON을 액션 아티팩트로 남기기 (나중에 다운로드해서 확인 가능)
+      - name: Upload roadrun.json artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: roadrun-json
+          path: output/roadrun.json
