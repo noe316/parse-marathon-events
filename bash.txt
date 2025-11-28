@@ -1,3 +1,9 @@
 
-스크래핑 시작 :
+스크래핑 실행 :
 npm run scrape:roadrun
+
+
+scrape-roadrun.yml 커밋&푸시 :
+git add package.json package-lock.json src/scrape-roadrun.mjs .github/workflows/scrape-roadrun.yml
+git commit -m "feat: "
+git push origin main
