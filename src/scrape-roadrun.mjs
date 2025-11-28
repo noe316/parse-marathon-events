@@ -68,7 +68,7 @@ function parseTime(str) {
 }
 
 // 유틸: 종목 정규화
-function normalizeCategories(text) {
+function normalizeCourse(text) {
   return text
       .split(",")
       .map((s) => s.trim())
@@ -131,7 +131,7 @@ async function fetchRaceDetail(no) {
   // 결과 담을 객체 (초기값)
   let raceName = "";
   let dateRaw = "";
-  let categoriesRaw = "";
+  let courseRaw = "";
   let region = "";
   let venue = "";
   let entryRaw = "";
@@ -153,7 +153,7 @@ async function fetchRaceDetail(no) {
     } else if (label.includes("대회일시")) {
       dateRaw = valueText;
     } else if (label.includes("대회종목")) {
-      categoriesRaw = valueText;
+      courseRaw = valueText;
     } else if (label.includes("대회지역")) {
       region = valueText;
     } else if (label.includes("대회장소")) {
@@ -182,7 +182,7 @@ async function fetchRaceDetail(no) {
   }
 
   // 2) 대회종목 정규화
-  const categories = normalizeCategories(categoriesRaw);
+  const course = normalizeCourse(courseRaw);
 
   // 3) 지역 + 장소
   const locationFull = [region, venue].filter(Boolean).join(" ");
@@ -204,7 +204,7 @@ async function fetchRaceDetail(no) {
     source_url: url,
     race_name: raceName,
     race_datetime: raceDatetime,
-    categories,
+    course,
     location_full: locationFull,
     entry_period_raw: entryRaw,
     entry_start: entryStart,
