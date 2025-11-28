@@ -6,25 +6,22 @@
 #  •	upload-artifact: output/roadrun.json을 빌드 결과물로 저장
 #
 
-
 name: Scrape roadrun events
 
 on:
-  # 매주 월요일 00:00 KST 근처 (UTC 기준 일요일 15:00)
   schedule:
     - cron: "0 15 * * 0"
-  # 필요할 때 수동으로도 돌릴 수 있게
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -35,7 +32,7 @@ jobs:
       - name: Run scraper
         run: npm run scrape:roadrun
 
-      - name: Upload roadrun.json artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: roadrun-json
