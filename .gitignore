@@ -1,6 +1,4 @@
 node_modules
 output
 
-.idea/.idea/
-.idea/
-.idea/
+.idea
