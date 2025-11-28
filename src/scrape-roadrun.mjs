@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import fs from "fs";
 import path from "path";
 import iconv from "iconv-lite";
+import { upsertRaceToNotion } from "./notion.mjs";
 
 const BASE_URL = "http://www.roadrun.co.kr/schedule";
 const YEARS = [2026]; // 필요 연도
@@ -76,8 +77,8 @@ function normalizeCourse(text) {
       .map((s) => {
         if (s.includes("풀")) return "full";
         if (s.includes("하프")) return "half";
-        const m = s.match(/(\d+)\s*km/i);
-        if (m) return `${m[1]}km`;
+        const m = s.match(/(\d+)\s*k/i);
+        if (m) return `${m[1]}k`;
         return s;
       });
 }
@@ -223,6 +224,8 @@ async function main() {
       try {
         const race = await fetchRaceDetail(no);
         results.push(race);
+
+        await upsertRaceToNotion(race); // ← 이 줄
       } catch (err) {
         console.error(`[ERROR] detail no=${no}`, err.message);
       }

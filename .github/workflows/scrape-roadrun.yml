@@ -37,3 +37,7 @@ jobs:
         with:
           name: roadrun-json
           path: output/roadrun.json
+
+env:
+  NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+  NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}

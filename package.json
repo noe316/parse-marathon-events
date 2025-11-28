@@ -11,6 +11,7 @@
     "scrape:roadrun": "node src/scrape-roadrun.mjs"
   },
   "dependencies": {
+    "@notionhq/client": "^5.4.0",
     "axios": "^1.13.2",
     "cheerio": "^1.1.2",
     "dayjs": "^1.11.19",
