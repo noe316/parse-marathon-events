@@ -75,11 +75,18 @@ function normalizeCourse(text) {
       .map((s) => s.trim())
       .filter(Boolean)
       .map((s) => {
+        // 풀 / 하프
         if (s.includes("풀")) return "full";
         if (s.includes("하프")) return "half";
-        const m = s.match(/(\d+)\s*k/i);
-        if (m) return `${m[1]}k`;
-        return s;
+
+        // 숫자 + (옵션: 소수점) + (옵션: 공백) + k/km/K/KM etc.
+        const dist = s.match(/(\d+(?:\.\d+)?)[ ]*(k|km)/i);
+        if (dist) {
+          return `${dist[1]}K`; // 항상 k 로 통일
+        }
+
+        // 다른 포맷 fallback
+        return s.toLowerCase();
       });
 }
 
