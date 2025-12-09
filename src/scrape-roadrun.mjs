@@ -1,4 +1,5 @@
 // src/scrape-roadrun.mjs
+import "dotenv/config";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import dayjs from "dayjs";

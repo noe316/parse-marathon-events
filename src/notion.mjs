@@ -1,7 +1,8 @@
 // src/notion.mjs
-import pkg from "@notionhq/client";
+import { Client } from "@notionhq/client";
 
-const { Client } = pkg;
+// import pkg from "@notionhq/client";
+// const { Client } = pkg;
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const DB_ID = process.env.NOTION_DB_ID;

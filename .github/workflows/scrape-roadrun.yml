@@ -17,6 +17,10 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
 
+    env:
+      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
